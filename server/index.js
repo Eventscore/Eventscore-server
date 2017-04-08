@@ -1,7 +1,4 @@
-const dotenv = require('dotenv');
-
-dotenv.load();
-dotenv.config({ path: process.env.PWD + '/config.env' });
+require('dotenv').config();
 
 const express = require('express');
 
