@@ -1,25 +1,24 @@
-'use strict';
-let dotenv = require('dotenv')
+const dotenv = require('dotenv');
+
 dotenv.load();
-dotenv.config({path: process.env.PWD + '/config.env'});
+dotenv.config({ path: process.env.PWD + '/config.env' });
 
-let express = require('express');
-let app = express();
+const express = require('express');
 
-//events related endpoint
+const app = express();
+
+// events related endpoint
 app.route('/api/events')
-  .get(function(req, res){
-  	res.send('Get all events');
+  .get((req, res) => {
+    res.send('Get all events');
   })
-  .put(function(req, res){
+  .put((req, res) => {
     res.send('Update an event');
   })
-  .post(function(req, res){
+  .post((req, res) => {
     res.send('Add an event');
-  })
+  });
 
-let port = process.env.PORT || 1337;
+const port = process.env.PORT || 1337;
 
 app.listen(port);
-
-console.log('Listening on port ', port);
