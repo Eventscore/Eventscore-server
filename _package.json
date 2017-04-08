@@ -8,6 +8,8 @@
     "node": ">=6.4.0"
   },
   "scripts": {
+    "server-dev": "node server/index.js",
+    "start": "npm run server-dev"
   },
   "dependencies": {
   },
