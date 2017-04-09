@@ -8,7 +8,8 @@ let eventsSchema = mongoose.Schema({
 	updated: Date, //last time it was updated
 	artist: [{ type: Schema.Types.ObjectId, ref: 'Artists' }],
 	score: Number,
-	venue: { type: Schema.Types.ObjectId, ref: 'Venues' }
+	venue: { type: Schema.Types.ObjectId, ref: 'Venues' },
+  location: Object
 })
 
 let Events = mongoose.model('Events', eventsSchema);

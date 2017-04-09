@@ -1,5 +1,7 @@
 'use strict';
 let dotenv = require('dotenv')
+let eventsExampleData = require('../db/eventsExampleData');
+
 dotenv.load();
 dotenv.config({path: process.env.PWD + '/config.env'});
 
@@ -9,7 +11,7 @@ let app = express();
 //events related endpoint
 app.route('/api/events')
   .get(function(req, res){
-  	res.send('Get all events');
+  	res.send(eventsExampleData);
   })
   .put(function(req, res){
     res.send('Update an event');
