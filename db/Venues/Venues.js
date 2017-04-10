@@ -4,7 +4,7 @@ var db = require('../config.js');
 var venuesSchema = mongoose.Schema({
   location: String,
   address: String,
-  name: String,
+  displayName: String,
   geolocation: Number,
   capacity: Number
 });
