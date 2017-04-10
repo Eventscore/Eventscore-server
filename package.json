@@ -7,7 +7,7 @@
     "dev": "nodemon server/index.js",
     "test": "mocha spec",
     "ci": "mocha spec",
-    "start": "node server/index.js",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
