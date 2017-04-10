@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const db = require('../config.js');
+var mongoose = require('mongoose');
+var db = require('../config.js');
 
-const eventsSchema = mongoose.Schema({
+var eventsSchema = mongoose.Schema({
   name: String,
   start: Date,
   created: Date,
@@ -11,4 +11,4 @@ const eventsSchema = mongoose.Schema({
   venue: { type: Schema.Types.ObjectId, ref: 'Venues' },
 });
 
-let Events = mongoose.model('Events', eventsSchema);
+var Events = mongoose.model('Events', eventsSchema);

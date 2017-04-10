@@ -1,8 +1,7 @@
 module.exports = {
-    "extends": "airbnb",
-    "plugins": [
-        "react",
-        "jsx-a11y",
-        "import"
-    ]
+  extend: 'hackreactor',
+  rules: {
+    // Rules here will override the 'hackreactor' configuration
+    // http://eslint.org/docs/rules/
+  }
 };

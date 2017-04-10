@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
-const mongoURI = process.env.MONGODB_URI;
+var mongoURI = process.env.MONGODB_URI;
 mongoose.connect(mongoURI);
 
 // Run in seperate terminal window using 'mongod'
-const db = mongoose.connection;
+var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
+db.once('open', function() {
   console.log('Mongodb connection open');
 });
 

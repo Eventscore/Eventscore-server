@@ -24,8 +24,6 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "mongoose": "^4.9.3",
-    "mocha": "^3.2.0",
-    "mocha-eslint": "^3.0.1",
     "nodemon": "^1.11.0"
   },
   "devDependencies": {
@@ -35,10 +33,17 @@
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "eslint-config-standard": "^10.2.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
-    "tape": "^4.6.3"
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^3.2.0",
+    "mocha-eslint": "^3.0.1",
+    "tape": "^4.6.3",
+    "request": "^2.70.0"
   },
   "babel": {
     "presets": [

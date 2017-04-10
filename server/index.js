@@ -1,21 +1,21 @@
 require('dotenv').config();
 
-const express = require('express');
+var express = require('express');
 
-const app = express();
+var app = express();
 
 // events related endpoint
 app.route('/api/events')
-  .get((req, res) => {
+  .get(function(req, res) {
     res.send('Get all events');
   })
-  .put((req, res) => {
+  .put(function(req, res) {
     res.send('Update an event');
   })
-  .post((req, res) => {
+  .post(function(req, res) {
     res.send('Add an event');
   });
 
-const port = process.env.PORT || 1337;
+var port = process.env.PORT || 1337;
 
 app.listen(port);

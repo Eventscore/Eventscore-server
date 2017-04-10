@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const db = require('../config.js');
+var mongoose = require('mongoose');
+var db = require('../config.js');
 
-let venuesSchema = mongoose.Schema({
+var venuesSchema = mongoose.Schema({
   location: String,
   address: String,
   name: String,
@@ -9,4 +9,4 @@ let venuesSchema = mongoose.Schema({
   capacity: Number
 });
 
-let Venues = mongoose.model('Venues', venuesSchema);
+var Venues = mongoose.model('Venues', venuesSchema);

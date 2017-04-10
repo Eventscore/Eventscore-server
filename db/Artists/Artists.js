@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const db = require('../config.js');
+var mongoose = require('mongoose');
+var db = require('../config.js');
 
-const artistsSchema = mongoose.Schema({
+var artistsSchema = mongoose.Schema({
   spotify: Object,
   klout: Number,
   genre: String,
@@ -9,4 +9,4 @@ const artistsSchema = mongoose.Schema({
   img: String,
 });
 
-let Artists = mongoose.model('Artists', artistsSchema);
+var Artists = mongoose.model('Artists', artistsSchema);

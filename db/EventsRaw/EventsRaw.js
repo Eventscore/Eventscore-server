@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const db = require('../config.js');
+var mongoose = require('mongoose');
+var db = require('../config.js');
 
-const eventsrawSchema = mongoose.Schema({
+var eventsrawSchema = mongoose.Schema({
   eventId: { type: Schema.Types.ObjectId, ref: 'Events' },
   data: Object,
 });
 
-let EventsRaw = mongoose.model('EventsRaw', eventsrawSchema);
+var EventsRaw = mongoose.model('EventsRaw', eventsrawSchema);
