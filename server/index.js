@@ -1,26 +1,23 @@
-'use strict';
-let dotenv = require('dotenv')
-let eventsExampleData = require('../db/eventsExampleData');
+require('dotenv').config();
+var eventsExampleData = require('../db/eventsExampleData');
 
-dotenv.load();
-dotenv.config({path: process.env.PWD + '/config.env'});
+var express = require('express');
 
-let express = require('express');
-let app = express();
+var app = express();
 
-//events related endpoint
+// events related endpoint
 app.route('/api/events')
   .get(function(req, res){
   	res.send(eventsExampleData);
   })
-  .put(function(req, res){
+  .put(function(req, res) {
     res.send('Update an event');
   })
-  .post(function(req, res){
+  .post(function(req, res) {
     res.send('Add an event');
-  })
+  });
 
-let port = process.env.PORT || 1337;
+var port = process.env.PORT || 1337;
 
 app.listen(port);
 

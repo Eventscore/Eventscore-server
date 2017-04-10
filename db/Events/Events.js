@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
-const db = require('../config.js');
+var mongoose = require('mongoose');
+var db = require('../config.js');
 
-let eventsSchema = mongoose.Schema({
+var eventsSchema = mongoose.Schema({
 	name: String,
-	start: Date, //may change to something else depending on response data
-	created: Date, //when it was added to the table
-	updated: Date, //last time it was updated
+	start: Date,
+	created: Date,
+	updated: Date,
 	artists: [{ type: Schema.Types.ObjectId, ref: 'Artists' }],
 	score: Number,
 	venue: { type: Schema.Types.ObjectId, ref: 'Venues' },
   location: Object
 })
 
-let Events = mongoose.model('Events', eventsSchema);
+var Events = mongoose.model('Events', eventsSchema);
