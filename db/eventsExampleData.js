@@ -8,7 +8,7 @@ module.exports = [
           "datetime":"2012-04-18T20:00:00-0800"},
   // created: Date, //when it was added to the table
   // updated: Date, //last time it was updated
-  artist: [{name: 'Eminem'}, {name: 'Philip Philips'}, {name: 'Louis CK'}],
+  artists: [{name: 'Eminem'}, {name: 'Philip Philips'}, {name: 'Louis CK'}],
   score: 100,
   venue: {"id":6239,
           "displayName":"The Fillmore",
@@ -26,7 +26,7 @@ module.exports = [
           "datetime":"2017-08-18T20:00:00-0800"},
   // created: Date, //when it was added to the table
   // updated: Date, //last time it was updated
-  artist: [{name: 'Conor McGregor'}, {name: 'Dwyane Wade'}, {name: 'Kobe Bean Bryant'}],
+  artists: [{name: 'Conor McGregor'}, {name: 'Dwyane Wade'}, {name: 'Kobe Bean Bryant'}],
   score: 101,
   venue: {"id":6239,
           "displayName":"Rum Ham",
