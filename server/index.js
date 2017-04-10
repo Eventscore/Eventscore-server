@@ -11,10 +11,10 @@ app.route('/api/events')
   	res.send(eventsExampleData);
   })
   .put(function(req, res) {
-    res.send('Update an event');
+    res.send('Update an event');  
   })
   .post(function(req, res) {
-    res.send('Add an event');
+    res.send('Add an event');  
   });
 
 var port = process.env.PORT || 1337;

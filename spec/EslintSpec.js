@@ -1,11 +1,11 @@
-const lint = require('mocha-eslint');
+var lint = require('mocha-eslint');
 
-const paths = [
+var paths = [
   './server',
   './db',
 ];
 
-const options = {
+var options = {
   formatter: 'compact',  // Defaults to `stylish`
 
   // Only display warnings if a test is failing
