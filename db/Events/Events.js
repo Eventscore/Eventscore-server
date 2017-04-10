@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var db = require('../config.js');
 
-let eventsSchema = mongoose.Schema({
+var eventsSchema = mongoose.Schema({
 	name: String,
 	start: Date,
 	created: Date,
