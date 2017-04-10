@@ -1,5 +1,5 @@
 require('dotenv').config();
-let eventsExampleData = require('../db/eventsExampleData');
+var eventsExampleData = require('../db/eventsExampleData');
 
 var express = require('express');
 
