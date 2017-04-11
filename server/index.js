@@ -4,9 +4,10 @@ var app = express();
 var Users = require('./Users/Users.js');
 var Events = require('./Events/Events.js');
 
-// events related endpoint
+//http://localhost:1337/api/events/longitude/-122.406417/latitude/37.785834
+app.get('/api/events/longitude/:lon/latitude/:lat', Events.getNearbyEvents);
+
 app.route('/api/events')
-  .get(Events.getNearbyEvents)
   .put(Events.updateEvent)
 
 app.route('/api/users')

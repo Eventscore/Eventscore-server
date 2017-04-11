@@ -25,7 +25,9 @@
     "eslint-plugin-node": "^4.2.2",
     "express": "^4.15.2",
     "mongoose": "^4.9.3",
+    "node-fetch": "^1.6.3",
     "nodemon": "^1.11.0",
+    "seatgeek-client": "^0.1.5",
     "seatgeek-js": "^1.0.0"
   },
   "devDependencies": {
