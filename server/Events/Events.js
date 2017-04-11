@@ -7,8 +7,8 @@ exports.getNearbyEvents = function(req, res) {
   return seatgeek
   .allEvents()
   .get()
-  .then(function (res) {
-    res.end();
+  .then(function(data) {
+    res.send(data);
   });
 };
 
