@@ -22,9 +22,11 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "dotenv": "^4.0.0",
+    "eslint-plugin-node": "^4.2.2",
     "express": "^4.15.2",
     "mongoose": "^4.9.3",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "seatgeek-js": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
