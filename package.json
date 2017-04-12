@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Eventscore/Eventscore-server#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
     "dotenv": "^4.0.0",
     "eslint-plugin-node": "^4.2.2",
     "express": "^4.15.2",
