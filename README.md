@@ -47,7 +47,7 @@ From within the root directory:
 npm install -g bower
 npm install
 bower install
-
+```
 
 ### Documentation
 
