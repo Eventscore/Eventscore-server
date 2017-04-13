@@ -1,12 +1,13 @@
-var mongoose = require('mongoose');
 var db = require('../config.js');
+var mongoose = require('mongoose');
 
 var artistsSchema = mongoose.Schema({
   spotify: Object,
-  klout: Number,
-  genre: String,
-  name: String,
+  score: Number,
+  genre: [String],
+  name: {type: String, unique: true},
   img: String,
 });
 
 var Artists = mongoose.model('Artists', artistsSchema);
+module.exports = Artists;

@@ -4,6 +4,8 @@ var app = express();
 var Users = require('./Users/Users.js');
 var Events = require('./Events/Events.js');
 
+
+
 //http://localhost:1337/api/events/longitude/-122.406417/latitude/37.785834
 app.get('/api/events/longitude/:lon/latitude/:lat', Events.getNearbyEvents);
 
@@ -19,7 +21,5 @@ app.route('/api/users/:userid')
   .put(Users.updateUser)
 
 var port = process.env.PORT || 1337;
-
 app.listen(port);
-
 console.log('Listening on port', port);
