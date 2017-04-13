@@ -53,7 +53,7 @@ exports.getNearbyEvents = function(req, res) {
               }
             }
             EventsRaw.create(rawBody).then(function(createdEventRaw) {
-              event.pe`rformers.forEach(function(performer) {
+              event.performers.forEach(function(performer) {
                 //does this artist exist in artists db already?
                 return Artists.findOne({'name': performer.name})
                 .lean()
