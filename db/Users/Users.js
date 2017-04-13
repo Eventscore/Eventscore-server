@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
 var db = require('../config.js');
+var mongoose = require('mongoose');
 
 var usersSchema = mongoose.Schema({
   favevents: [{type: mongoose.Schema.Types.ObjectId, ref: 'Events'}],
@@ -9,3 +9,4 @@ var usersSchema = mongoose.Schema({
 });
 
 var Users = mongoose.model('Users', usersSchema);
+module.exports = Users;

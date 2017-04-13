@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
 var db = require('../config.js');
+var mongoose = require('mongoose');
 
 var venuesSchema = mongoose.Schema({
   location: String,
@@ -10,3 +10,4 @@ var venuesSchema = mongoose.Schema({
 });
 
 var Venues = mongoose.model('Venues', venuesSchema);
+module.exports = Venues;
