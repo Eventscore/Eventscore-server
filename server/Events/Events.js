@@ -143,29 +143,28 @@ exports.getNearbyEvents = function(req, res) {
         }, mappedObj);
       })
       .then(function(createdObj) {
-        return createdObj;
-        // fetch.Promise.each(createdObj.createdEvents, function(createdEvent) {
-        //   //for each created event
-        //   //i need to check if artists exist in the Artists table
-        //   //if they exist, take their objectid and push to the createdEvent's artists array
-        //   //else create the artist and push to the createdEvent's artists array
-        //   fetch.Promise.each(createdEvent.artists, function(artist) {
-        //     // console.log('ARTIST', artist)
+        fetch.Promise.each(createdObj.createdEvents, function(createdEvent) {
+          //for each created event
+          //i need to check if artists exist in the Artists table
+          //if they exist, take their objectid and push to the createdEvent's artists array
+          //else create the artist and push to the createdEvent's artists array
+          fetch.Promise.each(createdEvent.artists, function(artist) {
+            // console.log('ARTIST', artist)
 
-        //     spotifyApi.searchArtists(artist.name)
-        //     .then(function(data) {
-        //       var artistBody = {
-        //         spotify: {
-        //         followers: data.body.artists.items[0].followers.total || 0,
-        //         popularity: data.body.artists.items[0].popularity || 0
-        //         },
-        //         score: artist.score,
-        //         genre: data.body.artists.items[0].genres || 'N/A',
-        //         name: artist.name || 0,
-        //         img: data.body.artists.items[0].images[0].url || 'N/A'
-        //       }
-        //       createdEvent.artistBodies.push(artistBody);
-        //     });
+            spotifyApi.searchArtists(artist.name)
+            .then(function(data) {
+              var artistBody = {
+                spotify: {
+                followers: data.body.artists.items[0].followers.total || 0,
+                popularity: data.body.artists.items[0].popularity || 0
+                },
+                score: artist.score,
+                genre: data.body.artists.items[0].genres || 'N/A',
+                name: artist.name || 0,
+                img: data.body.artists.items[0].images[0].url || 'N/A'
+              }
+              createdEvent.artistBodies.push(artistBody);
+            });
             // .then(function(artistBody) {
             //   Artists.update(artistBody,{
             //   $setOnInsert: artist
@@ -186,8 +185,8 @@ exports.getNearbyEvents = function(req, res) {
             //     }
             //   })
             // })
-        //   })
-        // })     
+          })
+        })     
       })
       .tap(function(createdObj) {
         console.log('CREATED OBJECT', createdObj);
