@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
 var db = require('../config.js');
+var mongoose = require('mongoose');
 
 var eventsrawSchema = mongoose.Schema({
   eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Events' },
@@ -7,3 +7,4 @@ var eventsrawSchema = mongoose.Schema({
 });
 
 var EventsRaw = mongoose.model('EventsRaw', eventsrawSchema);
+module.exports = EventsRaw;
