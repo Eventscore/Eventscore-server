@@ -6,7 +6,7 @@ var eventsSchema = new mongoose.Schema({
   start: Date,
   created: Date,
   updated: Date,
-  artists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Artists', unique: true }],
+  artists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Artists', unique: true}],
   score: Number,
   location: {
     type: {
