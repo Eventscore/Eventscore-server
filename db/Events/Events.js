@@ -17,7 +17,9 @@ var eventsSchema = new mongoose.Schema({
     },
     coordinates: [Number]
   },
-  venue: String //geolocation will be inside this object (x - longitude, y - latitude)
+  venue: String,
+  city: String,
+  state: String
 })
 
 

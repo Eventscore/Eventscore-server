@@ -41,7 +41,9 @@ exports.getNearbyEvents = function(req, res) {
             artists: [],
             score: 0,
             location: { "type" : "Point", "coordinates" : [ event.venue.location.lon, event.venue.location.lat ] },
-            venue: event.venue.name_v2
+            venue: event.venue.name_v2,
+            city: event.venue.city,
+            state: event.vanue.state
           };
           //For each event, we create a row in the Events table
           return Events.create(eventBody)
