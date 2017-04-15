@@ -19,22 +19,21 @@ exports.getNearbyEvents = function(req, res) {
           type : "Point",
           coordinates : [ longitude, latitude ]
         },
-        $maxDistance : 10000
+        $maxDistance : 100000
       }
     }
   }
 
   Events.find(query)
-  .then(function(results) {
-    if (results.length < 10) {
-      fetch('https://api.seatgeek.com/2/events?taxonomies.name=concert&sort=score.desc&per_page=50&page=1&lon=' + longitude + '&lat=' + latitude + '&range=10mi&client_id=' + process.env.SEATGEEK_CLIENTID)
-      .then(function(response) {
-        return response.json();
+  .then(function(eventTableQueryResults) {
+    if (eventTableQueryResults.length < 5) {
+      return fetch('https://api.seatgeek.com/2/events?taxonomies.name=concert&sort=score.desc&per_page=25&page=1&lon=' + longitude + '&lat=' + latitude + '&range=15mi&client_id=' + process.env.SEATGEEK_CLIENTID)
+      .then(function(apiResponse) {
+        return apiResponse.json();
       })
       .then(function(json) {
-        console.log('RESPONSE', json);
         fetch.Promise.each(json.events, function(event) {
-          var body = {
+          var eventBody = {
             name: event.short_title,
             start: event.datetime_utc,
             created: new Date(),
@@ -45,27 +44,30 @@ exports.getNearbyEvents = function(req, res) {
             venue: event.venue.name_v2
           };
           //For each event, we create a row in the Events table
-          return Events.create(body)
+          return Events.create(eventBody)
           .then(function(createdEvent) {
-            //Then we loop through the list of performers in the raw event object
+            //Then we loop through the list of performers in the raw event object we get from SeatGeek
             fetch.Promise.each(event.performers, function(performer) {
-
-              spotifyApi.searchArtists(performer.name)
-              .then(function(data) {
+              //FOR ERIK: Here's where the call to Spotify is made
+              return spotifyApi.searchArtists(performer.name)
+              .catch(function(spotifyDataError) {
+                console.log('SPOTIFY API ERROR', spotifyDataError);
+              })
+              .then(function(spotifyData) {
                 var artistsBody = {
                 spotify: {
-                  followers: data.body.artists.items[0].followers.total || 0,
-                  popularity: data.body.artists.items[0].popularity || 0
+                  followers: spotifyData.body.artists.items[0].followers.total || 0,
+                  popularity: spotifyData.body.artists.items[0].popularity || 0,
                 },
                 score: performer.score,
-                genre: data.body.artists.items[0].genres || 'N/A',
+                genre: spotifyData.body.artists.items[0].genres || 'N/A',
                 name: performer.name || 0,
-                img: data.body.artists.items[0].images[0].url || 'N/A'
+                img: spotifyData.body.artists.items[0].images[0].url || 'N/A'
                 }
 
                 var updateArtists = fetch.Promise.promisify(Artists.update);
 
-                updateArtists.call(Artists, artistsBody, {
+                return updateArtists.call(Artists, artistsBody, {
                   $setOnInsert: performer }, {upsert: true
                 })
                 .then(function(artistResult) {
@@ -76,7 +78,7 @@ exports.getNearbyEvents = function(req, res) {
                 .catch(function(e) {
                   console.log('ERROR:', e);
                 })
-                .then(function(result) {
+                .then(function(continueResult) {
                   return Artists.findOne({'name': performer.name})
                 })
                 .then(function(foundResult) {
@@ -88,16 +90,15 @@ exports.getNearbyEvents = function(req, res) {
                     eventId: nextResult._id,
                     data: {
                       seatgeek: event,
-                      spotify: data
+                      spotify: spotifyData
                     }
                   }
                   return EventsRaw.create(rawBody)
                 })
-                .then(function(finalResult) {
+                .then(function(eventsRawCreateResults) {
                   Events.find(query)
-                  .then(function(results) {
-                    //BUG: GETTING ERROR: Can't set headers after they are sent.
-                    res.send(results);
+                  .then(function(queryResults) {
+                    return queryResults;
                   })
                 })
               })   
@@ -105,9 +106,15 @@ exports.getNearbyEvents = function(req, res) {
           })  
         })
       })
-    } else {
-      res.send(results);
     }
+  })
+  .then(function(finalResults) {
+    setTimeout(function(){
+      Events.find(query)
+    .then(function(finalQueryResults) {
+      res.send(finalQueryResults);
+    });
+    }, 1000);
   })
 };
 
