@@ -22,7 +22,6 @@ app.use(session({
 }));
 
 
-//http://localhost:1337/api/events/longitude/-122.406417/latitude/37.785834
 app.get('/api/events/longitude/:lon/latitude/:lat', Events.getNearbyEvents);
 
 app.route('/api/events')
