@@ -116,7 +116,7 @@ exports.getNearbyEvents = function(req, res) {
     .then(function(finalQueryResults) {
       res.send(finalQueryResults);
     });
-    }, 1000);
+    }, 3000);
   })
 };
 
