@@ -19,6 +19,7 @@ var eventsSchema = new mongoose.Schema({
   },
   venue: String,
   city: String,
+  state: String,
 })
 
 
