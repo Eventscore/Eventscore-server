@@ -33,7 +33,6 @@ exports.getNearbyEvents = function(req, res) {
       })
       .then(function(json) {
         fetch.Promise.each(json.events, function(event) {
-          console.log('VENUE DATA', event);
           var eventBody = {
             name: event.short_title,
             start: event.datetime_utc,
@@ -44,6 +43,7 @@ exports.getNearbyEvents = function(req, res) {
             location: { "type" : "Point", "coordinates" : [ event.venue.location.lon, event.venue.location.lat ] },
             venue: event.venue.name_v2,
             city: event.venue.city || 'unlisted',
+            state: event.venue.state || 'unlisted',
           };
           //For each event, we create a row in the Events table
           return Events.create(eventBody)
@@ -110,13 +110,22 @@ exports.getNearbyEvents = function(req, res) {
       })
     }
   })
-  .then(function(finalResults) {
+  .then(function(outerResults) {
     setTimeout(function() {
       Events.find(query)
       .then(function(finalQueryResults) {
-        console.log('FINAL QUERY RESULTS', finalQueryResults);
-        res.send(finalQueryResults);
-      });
+        return fetch.Promise.map(finalQueryResults, function(finalQueryResult) {
+          return Events.findOne(finalQueryResult._id)
+          .populate('artists')
+          .exec(function(err, event) {
+            return event
+          })
+        })
+      })
+      .then(function(mappedResults) {
+        console.log('TESTING', mappedResults);
+        res.send(mappedResults);
+      })
     }, 3300)
   })
 };
