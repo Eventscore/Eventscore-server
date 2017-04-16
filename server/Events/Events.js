@@ -43,7 +43,7 @@ exports.getNearbyEvents = function(req, res) {
             score: 0,
             location: { "type" : "Point", "coordinates" : [ event.venue.location.lon, event.venue.location.lat ] },
             venue: event.venue.name_v2,
-            city: event.venue.state || 'unlisted',
+            city: event.venue.city || 'unlisted',
           };
           //For each event, we create a row in the Events table
           return Events.create(eventBody)
