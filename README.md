@@ -13,21 +13,18 @@
 
 ## Required Dependencies (change for server)
 - node.js 
-- brew
-- Xcode
-- Watchman (brew install watchman)
-- React Native (npm install -g react-native-cli)
+- brew ?
+- Watchman (brew install watchman) ?
 
-## Setup Instructions (only need to complete once) (change for server)
+## Setup Instructions (only need to complete once)
 
 - npm install
-- git remote add upstream https://github.com/Eventscore/Eventscore.git
+- git remote add upstream https://github.com/Eventscore/Eventscore-server.git
+- create a file called '.env' under the root directory that includes the information in the '.env.example' file and fill in your API keys
+- when testing ensure your Client EventScore repo is pointed to the correct location. Use localhose for testing, but ensure you make sure you change it back to the heroku link after it is pushed up. This is currently in Eventscore/app/lip/api.js
 
-## Start Instructions (change for server)
-- In xCode open Eventscore/ios/Eventscore.xcodeproj to view the app
+## Start Instructions
 - npm start
-- Hit the play button
-
 
 ## Requirements (change for server)
 
