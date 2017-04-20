@@ -5,8 +5,8 @@ var Events = require('../../db/Events/Events.js');
 var EventsRaw = require('../../db/EventsRaw/EventsRaw.js');
 var SpotifyWebApi = require('spotify-web-api-node');
 var spotifyApi = new SpotifyWebApi({
-  clientId : process.env.SPOTIFY_CLIENTID,
-  clientSecret : process.env.SPOTIFY_CLIENTSECRET
+  clientId: process.env.SPOTIFY_CLIENTID,
+  clientSecret: process.env.SPOTIFY_CLIENTSECRET
 });
 
 exports.getNearbyEvents = function(req, res) {
@@ -16,13 +16,13 @@ exports.getNearbyEvents = function(req, res) {
     location: {
       $near: {
         $geometry: {
-          type : "Point",
-          coordinates : [ longitude, latitude ]
+          type: 'Point',
+          coordinates: [ longitude, latitude ]
         },
-        $maxDistance : 100000
+        $maxDistance: 100000
       }
     }
-  }
+  };
 
   Events.find(query)
   .then(function(eventTableQueryResults) {
@@ -40,10 +40,20 @@ exports.getNearbyEvents = function(req, res) {
             updated: new Date(),
             artists: [],
             score: 0,
-            location: { "type" : "Point", "coordinates" : [ event.venue.location.lon, event.venue.location.lat ] },
+            location: { 
+              'type': 'Point', 
+              'coordinates': [ event.venue.location.lon, event.venue.location.lat ] 
+            },
             venue: event.venue.name_v2,
             city: event.venue.city || 'unlisted',
             state: event.venue.state || 'unlisted',
+            sgticketsurl: event.url || 'unlisted',
+            sgscore: event.score || 0,
+            venueScore: event.venue.score || 0
+            // venue: {
+            //   name: event.venue.name_v2,
+            //   score: event.venue.score || 0
+            // },
           };
           //For each event, we create a row in the Events table
           return Events.create(eventBody)
@@ -57,15 +67,15 @@ exports.getNearbyEvents = function(req, res) {
               })
               .then(function(spotifyData) {
                 var artistsBody = {
-                spotify: {
-                  followers: spotifyData.body.artists.items[0].followers.total || 0,
-                  popularity: spotifyData.body.artists.items[0].popularity || 0,
-                },
-                score: performer.score,
-                genre: spotifyData.body.artists.items[0].genres || 'N/A',
-                name: performer.name || 0,
-                img: spotifyData.body.artists.items[0].images[0].url || 'N/A'
-                }
+                  spotify: {
+                    followers: spotifyData.body.artists.items[0].followers.total || 0,
+                    popularity: spotifyData.body.artists.items[0].popularity || 0,
+                  },
+                  score: performer.score,
+                  genre: spotifyData.body.artists.items[0].genres || 'N/A',
+                  name: performer.name || 0,
+                  img: spotifyData.body.artists.items[0].images[0].url || 'N/A'
+                };
 
                 var updateArtists = fetch.Promise.promisify(Artists.update);
 
@@ -81,7 +91,7 @@ exports.getNearbyEvents = function(req, res) {
                   console.log('ERROR:', e);
                 })
                 .then(function(continueResult) {
-                  return Artists.findOne({'name': performer.name})
+                  return Artists.findOne({'name': performer.name});
                 })
                 .then(function(foundResult) {
                   //BUG: GETTING DUPLICATE KEYS PUSHED INTO EVENTS' ARTISTS ARRAY
@@ -94,20 +104,20 @@ exports.getNearbyEvents = function(req, res) {
                       seatgeek: event,
                       spotify: spotifyData
                     }
-                  }
-                  return EventsRaw.create(rawBody)
+                  };
+                  return EventsRaw.create(rawBody);
                 })
                 .then(function(eventsRawCreateResults) {
                   Events.find(query)
                   .then(function(queryResults) {
                     return queryResults;
-                  })
-                })
-              })   
-            })
-          })  
-        })
-      })
+                  });
+                });
+              });   
+            });
+          });  
+        });
+      });
     }
   })
   .then(function(outerResults) {
@@ -118,16 +128,16 @@ exports.getNearbyEvents = function(req, res) {
           return Events.findOne(finalQueryResult._id)
           .populate('artists')
           .exec(function(err, event) {
-            return event
-          })
-        })
+            return event;
+          });
+        });
       })
       .then(function(mappedResults) {
         console.log('TESTING', mappedResults);
         res.send(mappedResults);
-      })
-    }, 3300)
-  })
+      });
+    }, 3300);
+  });
 };
 
 exports.updateEvent = function(req, res) {

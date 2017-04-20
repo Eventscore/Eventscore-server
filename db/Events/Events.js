@@ -10,7 +10,7 @@ var eventsSchema = new mongoose.Schema({
   score: Number,
   location: {
     type: {
-      type: "String",
+      type: 'String',
       required: true,
       enum: ['Point', 'LineString', 'Polygon'],
       default: 'Point'
@@ -20,7 +20,14 @@ var eventsSchema = new mongoose.Schema({
   venue: String,
   city: String,
   state: String,
-})
+  sgticketsurl: String,
+  sgscore: Number,
+  venueScore: Number
+  // venue: {
+  //   name: String,
+  //   score: Number
+  // },
+});
 
 
 
