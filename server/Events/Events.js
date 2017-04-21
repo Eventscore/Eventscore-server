@@ -84,7 +84,7 @@ exports.getNearbyEvents = function(req, res) {
                 })
                 .then(function(artistResult) {
                   if (artistResult.upserted) {
-                    // if artist has just been created
+                    // if artist has just been created add it to artists in the events db
                     return Events.findByIdAndUpdate(createdEvent._id, {$push: {artists: artistResult.upserted[0]._id}});
                   }
                 })
@@ -95,9 +95,8 @@ exports.getNearbyEvents = function(req, res) {
                   return Artists.findOne({'name': performer.name});
                 })
                 .then(function(foundResult) {
-                  //BUG: GETTING DUPLICATE KEYS PUSHED INTO EVENTS' ARTISTS ARRAY
-                  // this is if they are already found
-                  return Events.findByIdAndUpdate(createdEvent._id, {$push: {artists: foundResult._id}}, {runValidators: true});
+                  // if an artist was previously created add it to artists in the events db
+                  return Events.findByIdAndUpdate(createdEvent._id, {$addToSet: {artists: foundResult._id}}, {runValidators: true});
                 })
                 .then(function(nextResult) {
                   var rawBody = {
