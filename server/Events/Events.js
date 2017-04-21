@@ -84,6 +84,7 @@ exports.getNearbyEvents = function(req, res) {
                 })
                 .then(function(artistResult) {
                   if (artistResult.upserted) {
+                    // if artist has just been created
                     return Events.findByIdAndUpdate(createdEvent._id, {$push: {artists: artistResult.upserted[0]._id}});
                   }
                 })
@@ -95,6 +96,7 @@ exports.getNearbyEvents = function(req, res) {
                 })
                 .then(function(foundResult) {
                   //BUG: GETTING DUPLICATE KEYS PUSHED INTO EVENTS' ARTISTS ARRAY
+                  // this is if they are already found
                   return Events.findByIdAndUpdate(createdEvent._id, {$push: {artists: foundResult._id}}, {runValidators: true});
                 })
                 .then(function(nextResult) {
