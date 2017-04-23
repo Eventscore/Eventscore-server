@@ -5,10 +5,6 @@ exports.userLogin = function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
-  console.log('im inside the userlogin');
-  console.log('username: ', username);
-  console.log('password: ', password);
-
   Users.findOne({ 'username': username })
     .exec(function(err, user) {
       if (!user) {

@@ -2,7 +2,7 @@ var db = require('../config.js');
 var mongoose = require('mongoose');
 
 var eventsSchema = new mongoose.Schema({
-  name: {type: String},
+  name: {type: String, lowercase: true},
   start: Date,
   created: Date,
   updated: Date,

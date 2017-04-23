@@ -5,7 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-
+var cron = require('node-cron');
 var app = express();
 var Users = require('./RequestHandlers/Users.js');
 var Events = require('./RequestHandlers/Events.js');
@@ -36,6 +36,10 @@ app.route('/api/users/:userid')
 
 app.post('/auth/users/login', Users.userLogin);
 app.post('/auth/users/signup', Users.userSignUp);  
+
+// cron.schedule('5 * * * * *', function(){
+//   var keywords = Events.getKeywords();
+// });
 
 var port = process.env.PORT || 1337;
 app.listen(port);
