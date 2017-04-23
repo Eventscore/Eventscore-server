@@ -5,7 +5,7 @@ var artistsSchema = mongoose.Schema({
   spotify: Object,
   score: Number,
   genre: [String],
-  name: {type: String, unique: true},
+  name: {type: String, unique: true, lowercase: true},
   img: String,
 });
 
