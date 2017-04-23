@@ -1,4 +1,3 @@
-var Promise = require('bluebird');
 var fetch = require('node-fetch');
 fetch.Promise = require('bluebird'); 
 var Artists = require('../../db/Artists/Artists.js');
@@ -9,16 +8,6 @@ var spotifyApi = new SpotifyWebApi({
   clientId: process.env.SPOTIFY_CLIENTID,
   clientSecret: process.env.SPOTIFY_CLIENTSECRET
 });
-
-function capitalizeFirstLetter(string) {
-  var words = string.split(' ');
-  console.log('--------words----------\n', words);
-  var capWords = words.map((word) => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  });
-  console.log('--------capWords--------\n', capWords.join(' '));
-  return capWords.join(' ');
-}
 
 exports.getNearbyEvents = function(req, res) {
   var longitude = req.params.lon;
@@ -151,65 +140,6 @@ exports.getNearbyEvents = function(req, res) {
     }, 3300);
   });
 };
-
-exports.getKeywords = function() {
-  // var hostBot = 'https://eventscore-bot-server-prod.herokuapp.com';
-  var hostBot = 'https://eventscore-bot-server-staging.herokuapp.com'; //staging
-  var route = '/api/crawl/keywords/';
-  var currentDate = new Date().toISOString();
-  Events.find({ start: { $gte: currentDate } })
-  .select('name venue')
-  .then((result) => {
-    var keywords = result.reduce((acc, cur) => {
-      var curName = cur.name.toLowerCase();
-      var curVenue = cur.venue.toLowerCase();
-      if(!acc.includes(curName)) {
-        acc.push(cur.name.toLowerCase());
-      }
-      if(!acc.includes(curVenue)) {
-        acc.push(cur.venue.toLowerCase());
-      }
-      return acc;
-    }, []);
-    var keywordJoin = keywords.join('^');
-    var url = `${hostBot}${route}${keywordJoin}`;
-    console.log('url',  url)
-    var options = {
-      method: 'GET',
-    };
-   return fetch(url, options);
-  })
-  .then((result) => {
-    console.log('---------------RESULT PRIOR TO TEXT CONVERSION ---------------\n', result);
-    return result.json();
-  })
-  .then((result) => {
-    console.log('------------------RESULT AFTER SOME CONVERSION-------------\n', result);
-    Promise.each(result, (element) => {
-      var watsonObj = {};
-      watsonObj.watsonToneAnger = element.watsonToneAnger;
-      watsonObj.watsonToneDisgust = element.watsonToneDisgust;
-      watsonObj.watsonToneFear = element.watsonToneFear;
-      watsonObj.watsonToneJoy = element.watsonToneJoy;
-      watsonObj.watsonToneSadness = element.watsonToneSadness;
-      watsonObj.negativeScore = element.negativeScore;
-      watsonObj.score = element.score;
-      // var refKeyword = capitalizeFirstLetter(element.keyword);
-
-      return Events.update({ name: element.keyword }, {
-        $set: {
-          watsonScore: watsonObj,
-          score: element.score,
-          instances: element.instances
-        }
-      });
-    });
-  })
-  .then((result) => console.log('---------result------------', result))
-  .catch((err) => {
-    console.log('error', err);
-  });
-}
 
 exports.updateEvent = function(req, res) {
 

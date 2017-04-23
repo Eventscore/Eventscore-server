@@ -22,10 +22,7 @@ var eventsSchema = new mongoose.Schema({
   state: String,
   sgticketsurl: String,
   sgscore: Number,
-  venueScore: Number,
-  watsonScore: Object,
-  socialScore: Number,
-  instances: Number,
+  venueScore: Number
   // venue: {
   //   name: String,
   //   score: Number
