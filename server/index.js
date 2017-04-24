@@ -40,12 +40,12 @@ app.route('/api/users/:userid')
 app.post('/auth/users/login', Users.userLogin);
 app.post('/auth/users/signup', Users.userSignUp);  
 
-app.get('/api/keywords', Events.getKeywords);
+// app.get('/api/keywords', Events.getKeywords);
 
 /* Uncomment section below to enable Cron job - assign sequence accordingly */
-// cron.schedule('5 * * * * *', function(){
-//   var keywords = Events.getKeywords();
-// });
+cron.schedule('30 * * * *', function(){
+  var keywords = Events.getKeywords();
+});
 
 var port = process.env.PORT || 1337;
 app.listen(port);
