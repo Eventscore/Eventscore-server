@@ -205,8 +205,9 @@ exports.getKeywords = function(req, res) {
       });
     });
   })
-  .then((result) => console.log('keywords have been updated');
-  )
+  .then((result) => {
+    console.log('keywords have been updated')
+  })
   .catch((err) => {
     console.log('error', err);
   });
