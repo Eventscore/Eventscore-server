@@ -150,7 +150,7 @@ exports.getNearbyEvents = function(req, res) {
   });
 };
 
-exports.getKeywords = function() {
+exports.getKeywords = function(req, res) {
   var hostBot = 'https://eventscore-bot-server-prod.herokuapp.com';
   // var hostBot = 'https://eventscore-bot-server-staging.herokuapp.com'; //staging
   var route = '/api/crawl/keywords/';
@@ -205,7 +205,13 @@ exports.getKeywords = function() {
       });
     });
   })
-  .then((result) => res.send('keywords have been updated'))
+  .then(
+    if(req !== undefined) {
+      (result) => res.send('keywords have been updated')
+    } else {
+      (result) => console.log('keywords have been updated')
+    }
+  )
   .catch((err) => {
     console.log('error', err);
   });
