@@ -6,7 +6,7 @@ var Promise = require('bluebird');
 var usersSchema = mongoose.Schema({
   favevents: [{type: mongoose.Schema.Types.ObjectId, ref: 'Events'}],
   name: String,
-  username: String,
+  username: {type: String, unique: true},
   email: String,
   password: String  
 });
