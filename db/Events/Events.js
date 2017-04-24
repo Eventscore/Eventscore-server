@@ -17,9 +17,9 @@ var eventsSchema = new mongoose.Schema({
     },
     coordinates: [Number]
   },
-  venue: String,
-  city: String,
-  state: String,
+  venue: {type: String, lowercase: true},
+  city: {type: String, lowercase: true},
+  state: {type: String, lowercase: true},
   sgticketsurl: String,
   sgscore: Number,
   venueScore: Number,
