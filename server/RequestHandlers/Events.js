@@ -183,6 +183,7 @@ exports.getKeywords = function() {
   })
   .then((result) => {
     console.log('------------------RESULT AFTER SOME CONVERSION-------------\n', result);
+    var currentDate = new Date().toISOString();
     Promise.each(result, (element) => {
       var watsonObj = {};
       watsonObj.watsonToneAnger = element.watsonToneAnger;
@@ -198,12 +199,13 @@ exports.getKeywords = function() {
         $set: {
           watsonScore: watsonObj,
           score: element.score,
-          instances: element.instances
+          instances: element.instances,
+          updated: currentDate
         }
       });
     });
   })
-  .then((result) => res.json(result))
+  .then((result) => res.send('keywords have been updated'))
   .catch((err) => {
     console.log('error', err);
   });
