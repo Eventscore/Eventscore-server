@@ -40,7 +40,7 @@ app.route('/api/users/:userid')
 app.post('/auth/users/login', Users.userLogin);
 app.post('/auth/users/signup', Users.userSignUp);  
 
-// app.get('/api/keywords', Events.getKeywords);
+app.get('/api/keywords', Events.getKeywords);
 
 /* Uncomment section below to enable Cron job - assign sequence accordingly */
 // cron.schedule('30 * * * *', function(){

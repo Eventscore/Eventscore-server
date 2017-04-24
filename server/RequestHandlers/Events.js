@@ -205,9 +205,15 @@ exports.getKeywords = function(req, res) {
       });
     });
   })
-  .then((result) => {
-    console.log('keywords have been updated')
+  .then(
+    (result) => {
+      res.send('i should have been closed');
+      res.end();
   })
+  // .then(
+  //   (result) => {
+  //   console.log('keywords have been updated')
+  // })
   .catch((err) => {
     console.log('error', err);
   });
