@@ -1,3 +1,4 @@
+var Promise = require('bluebird');
 var fetch = require('node-fetch');
 fetch.Promise = require('bluebird'); 
 var Artists = require('../../db/Artists/Artists.js');
@@ -202,7 +203,7 @@ exports.getKeywords = function() {
       });
     });
   })
-  .then((result) => console.log('---------result------------', result))
+  .then((result) => res.json(result))
   .catch((err) => {
     console.log('error', err);
   });

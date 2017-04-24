@@ -23,13 +23,16 @@ app.use(session({
 
 app.get('/api/events/longitude/:lon/latitude/:lat', Events.getNearbyEvents);
 
+//THIS AN EMPTY FUNCTION
 app.route('/api/events')
   .put(Events.updateEvent);
 
+//THIS AN EMPTY FUNCTION
 app.route('/api/users')
   .get(Users.getAllUsers)
   .post(Users.addUser);
 
+//THIS AN EMPTY FUNCTION
 app.route('/api/users/:userid')
   .get(Users.getUser)
   .put(Users.updateUser);
