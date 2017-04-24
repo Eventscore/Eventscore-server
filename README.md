@@ -6,7 +6,7 @@
 
 ## Team
 
-- Aloysius Pawicki
+- Aloysius Pawlicki
 - Edwin Brower
 - Jason Kuo
 - John Duong
