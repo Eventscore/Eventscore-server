@@ -207,7 +207,7 @@ exports.getKeywords = function(req, res) {
   })
   .then(
     (result) => {
-      res.send('i should have been closed');
+      // res.send('i should have been closed');
       res.end();
   })
   // .then(
