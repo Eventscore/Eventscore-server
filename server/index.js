@@ -23,6 +23,7 @@ app.use(session({
 
 app.get('/api/events/longitude/:lon/latitude/:lat', Events.getNearbyEvents);
 app.get('/api/events/search/longitude/:lon/latitude/:lat', Events.searchEvents);
+app.get('/api/events/genres/longitude/:lon/latitude/:lat/genre/:genre', Events.getEventsByGenre);
 
 //THIS AN EMPTY FUNCTION
 app.route('/api/events')
