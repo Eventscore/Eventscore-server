@@ -165,7 +165,7 @@ exports.getEventsByGenre = function(req, res) {
 exports.searchEvents = function(req, res) {
   var longitude = req.params.lon;
   var latitude = req.params.lat;
-  var keywords;
+  var keywords = req.params.keywords;
   console.log('REQ KEYWORDS', req.query);
   if (req.query.keywords) {
     keywords = req.query.keywords.split('-')
