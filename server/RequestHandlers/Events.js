@@ -12,7 +12,7 @@ var spotifyApi = new SpotifyWebApi({
 
 function capitalizeFirstLetter(string) {
   var words = string.split(' ');
-  var capWords = words.map((word) => {
+  var capWords = words.map(function(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   });
   return capWords.join(' ');
@@ -172,7 +172,6 @@ exports.searchEvents = function(req, res) {
   } else {
     keywords = [];
   }
-  console.log('KEYWORDS', keywords);
   var query = { 
     location: {
       $near: {
