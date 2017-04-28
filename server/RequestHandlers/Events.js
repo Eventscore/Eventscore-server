@@ -167,8 +167,11 @@ exports.searchEvents = function(req, res) {
   var latitude = req.params.lat;
   var keywords;
   console.log('REQ KEYWORDS', req.query);
-  if (req.query.keywords) {
+  if (req.query.keywords === undefined) {
+    keywords = [];
+  } else {
     keywords = req.query.keywords.split('-')
+  }
   }
   console.log('KEYWORDS', keywords);
   var query = { 
