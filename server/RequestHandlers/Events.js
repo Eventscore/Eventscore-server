@@ -167,6 +167,7 @@ exports.searchEvents = function(req, res) {
   var latitude = req.params.lat;
   var keywords;
   console.log('REQ KEYWORDS', req.query);
+
   if (req.query.keywords.length > 0) {
     keywords = req.query.keywords.split('-')
   } else {
@@ -510,13 +511,8 @@ exports.getKeywords = function(req, res) {
   })
   .then(
     (result) => {
-      // res.send('i should have been closed');
       res.end();
   })
-  // .then(
-  //   (result) => {
-  //   console.log('keywords have been updated')
-  // })
   .catch((err) => {
     console.log('error', err);
   });
