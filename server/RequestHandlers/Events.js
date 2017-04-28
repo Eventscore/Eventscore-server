@@ -12,7 +12,7 @@ var spotifyApi = new SpotifyWebApi({
 
 function capitalizeFirstLetter(string) {
   var words = string.split(' ');
-  var capWords = words.map((word) => {
+  var capWords = words.map(function(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   });
   return capWords.join(' ');
@@ -151,14 +151,14 @@ exports.getEventsByGenre = function(req, res) {
           mappedResult.artists.forEach(function(artistObject) {
             mappedGenres = mappedGenres.concat(artistObject.genre)
           })
-          console.log('MAPPED GENRES', mappedGenres);
           if (mappedGenres.includes(genre)) {
             results.push(mappedResult);
           }
         })
+        console.log('RESULTS', results);
         res.send(results);
       });
-    }, 2500);
+    }, 2300);
   });
 }
 
@@ -167,13 +167,12 @@ exports.searchEvents = function(req, res) {
   var latitude = req.params.lat;
   var keywords;
   console.log('REQ KEYWORDS', req.query);
-  if (req.query.keywords === undefined) {
-    keywords = [];
-  } else {
+
+  if (req.query.keywords.length > 0) {
     keywords = req.query.keywords.split('-')
+  } else {
+    keywords = [];
   }
-  }
-  console.log('KEYWORDS', keywords);
   var query = { 
     location: {
       $near: {
@@ -451,7 +450,7 @@ exports.getNearbyEvents = function(req, res) {
         console.log('TESTING', mappedResults);
         res.send(mappedResults);
       });
-    }, 2800);
+    }, 3000);
   });
 };
 
